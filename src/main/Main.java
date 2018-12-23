@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class main {
+public class Main {
+
     public static void main(String[] args) {
 
 //        p1();
-        p2();
+//        p2();
 //        p3();
 
     }
@@ -612,27 +613,27 @@ public class main {
 
         try {
 
-//            Node res1 = bfs.search();
-//            System.out.println("BFS: ");
-//            System.out.println("*********************");
-//            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
-//            Vector<State> solution1 = Problem.solution(res1);
-//            if (!solution1.isEmpty())
-//                for(State n : solution1) {
-//                    n.printState();
-//                    System.out.println("*********************");
-//                }
+            Node res1 = bfs.search();
+            System.out.println("BFS: ");
+            System.out.println("*********************");
+            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
+            Vector<State> solution1 = Problem.solution(res1);
+            if (!solution1.isEmpty())
+                for(State n : solution1) {
+                    n.printState();
+                    System.out.println("*********************");
+                }
 
-//            Node res2 = dfs.search();
-//            System.out.println("DFS: ");
-//            System.out.println("*********************");
-//            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
-//            Vector<State> solution2 = Problem.solution(res2);
-//            if (!solution2.isEmpty())
-//                for(State n : solution2) {
-//                    n.printState();
-//                    System.out.println("*********************");
-//                }
+            Node res2 = dfs.search();
+            System.out.println("DFS: ");
+            System.out.println("*********************");
+            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
+            Vector<State> solution2 = Problem.solution(res2);
+            if (!solution2.isEmpty())
+                for(State n : solution2) {
+                    n.printState();
+                    System.out.println("*********************");
+                }
 
             Node res3 = ucs.search();
             System.out.println("UCS: ");
@@ -874,4 +875,5 @@ public class main {
         }
 
     }
+
 }

@@ -5,9 +5,7 @@ import resources.Node;
 import resources.Problem;
 import utilities.GSException;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
