@@ -1,6 +1,6 @@
-package serachers;
+package resources;
 
-public class Node {
+public class Node implements Comparable<Node>{
 
     private Node parent;
     private Node secondParent;
@@ -13,6 +13,7 @@ public class Node {
         this.parent = parent;
         this.state = state;
         this.action = action;
+        this.pathCost = pathCost;
     }
 
     public Node getParent() {
@@ -39,11 +40,32 @@ public class Node {
         this.state = state;
     }
 
+    public void setPathCost(double pathCost) {
+        this.pathCost = pathCost;
+    }
+
     public double getPathCost() {
         return pathCost;
     }
 
-    public void setPathCost(double pathCost) {
-        this.pathCost = pathCost;
+    public void setSecondParent(Node secondParent) {
+        this.secondParent = secondParent;
+    }
+
+    public int getDepth(){
+        int depth = 0;
+        if (parent == null)
+            return depth;
+        Node p = parent;
+        while(p != null){
+            depth++;
+            p = p.getParent();
+        }
+        return depth;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return 0;
     }
 }

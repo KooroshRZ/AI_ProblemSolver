@@ -1,4 +1,4 @@
-package serachers;
+package resources;
 
 public class Action {
 
@@ -24,5 +24,15 @@ public class Action {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public void printActions(){
+//        twins
+//        int [] a = (int[]) this.data;
+//        System.out.println("actions: " + a[0] + " " + a[1]);
+
+//        String[] acts = (String[]) this.data;
+        System.out.println(this.data);
+
     }
 }
