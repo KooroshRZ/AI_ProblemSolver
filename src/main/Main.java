@@ -4,6 +4,7 @@ import resources.Action;
 import resources.Node;
 import resources.Problem;
 import resources.State;
+import searchers.AStarSearcher;
 import searchers.BFSearcher;
 import searchers.DFSearcher;
 import searchers.UCSearcher;
@@ -18,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
 
 //        p1();
-//        p2();
+        p2();
 //        p3();
 
     }
@@ -457,9 +458,9 @@ public class Main {
             @Override
             public State initialState() {
                 return new State(new int[][]{
-                        {3, 4, 0},
-                        {6, 1, 8},
-                        {2, 5, 7}
+                        {4, 1, 2},
+                        {7, 5, 8},
+                        {6, 0, 3}
                 });
             }
 
@@ -610,41 +611,55 @@ public class Main {
         BFSearcher bfs = new BFSearcher(p2);
         DFSearcher dfs = new DFSearcher(p2);
         UCSearcher ucs = new UCSearcher(p2);
+        AStarSearcher aStar = new AStarSearcher(p2);
 
         try {
 
-            Node res1 = bfs.search();
-            System.out.println("BFS: ");
+//            Node res1 = bfs.search();
+//            System.out.println("BFS: ");
+//            System.out.println("*********************");
+//            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
+//            Vector<State> solution1 = Problem.solution(res1);
+//            if (!solution1.isEmpty())
+//                for(State n : solution1) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
+//
+//            Node res2 = dfs.search();
+//            System.out.println("DFS: ");
+//            System.out.println("*********************");
+//            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
+//            Vector<State> solution2 = Problem.solution(res2);
+//            if (!solution2.isEmpty())
+//                for(State n : solution2) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
+//
+//            Node res3 = ucs.search();
+//            System.out.println("UCS: ");
+//            System.out.println("*********************");
+//            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
+//            Vector<State> solution3 = Problem.solution(res3);
+//            if (!solution3.isEmpty())
+//                for(State n : solution3) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
+
+            System.out.println("searching");
+            Node res4 = aStar.search();
+            System.out.println("A*: ");
             System.out.println("*********************");
-            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
-            Vector<State> solution1 = Problem.solution(res1);
-            if (!solution1.isEmpty())
-                for(State n : solution1) {
+            System.out.println((res4 != null ? " Path Cost: " +  res4.getPathCost() + " " : "NOT FOUND ") + aStar.toString() );
+            Vector<State> solution4 = Problem.solution(res4);
+            if (!solution4.isEmpty())
+                for(State n : solution4) {
                     n.printState();
                     System.out.println("*********************");
                 }
 
-            Node res2 = dfs.search();
-            System.out.println("DFS: ");
-            System.out.println("*********************");
-            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
-            Vector<State> solution2 = Problem.solution(res2);
-            if (!solution2.isEmpty())
-                for(State n : solution2) {
-                    n.printState();
-                    System.out.println("*********************");
-                }
-
-            Node res3 = ucs.search();
-            System.out.println("UCS: ");
-            System.out.println("*********************");
-            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
-            Vector<State> solution3 = Problem.solution(res3);
-            if (!solution3.isEmpty())
-                for(State n : solution3) {
-                    n.printState();
-                    System.out.println("*********************");
-                }
 
         } catch (GSException | InterruptedException e){
             e.printStackTrace();
@@ -661,9 +676,9 @@ public class Main {
                         {0, 0, 0, 0, 0, 0, 0, 0},
                         {0, -1, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, -1, 0, 0},
-                        {0, 0, 0, -1, 0, 0, 0, 0},
+                        {-1, 0, 0, -1, 0, 0, 0, 0},
                         {0, 0, 0, 0, -1, 0, 0, 0},
-                        {2, 0, 0, 0, 0, 0, 0, 0},
+                        {2, 0, 0, 0, 0, 0, -1, 0},
                         {0, 0, 0, 0, 2, 0, 0, 0},
                 });
             }
