@@ -57,6 +57,8 @@ public class BDSearcher extends Searcher{
             // Measuring
             visitedNodesCount++;
 
+//            leaf.getState().printState();
+//            System.out.println("*************");
             if (problem.checkStatus(frontierFromGoal, leaf.getState()) != -1)
 //                return leaf;
                 buildPath(leaf, frontierFromGoal);
@@ -89,6 +91,8 @@ public class BDSearcher extends Searcher{
             // Measuring
             visitedNodesCount++;
 
+//            leafFromGoal.getState().printState();
+//            System.out.println("*************");
             // Goal test
             if (problem.checkStatus(frontier, leafFromGoal.getState()) != -1)
                 buildPath(leafFromGoal, frontier);
@@ -109,14 +113,15 @@ public class BDSearcher extends Searcher{
                     frontierFromGoal.add(child);
             }
 
-//            System.out.println("pretty goooood :D");
+            System.out.println("pretty goooood :D");
+
         }
         return null;
 
     }
 
     private void buildPath(Node node, List<Node> list){
-        
+
         int index = problem.checkStatus(list, node.getState());
         Node temp = list.get(index);
 

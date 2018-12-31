@@ -17,8 +17,8 @@ public class Main {
     public static void main(String[] args) {
 
 //        p1();
-        p2();
-//        p3();
+//        p2();
+        p3();
 
     }
 
@@ -712,7 +712,7 @@ public class Main {
                         {0, 0, 0, 0, 0, -1, 0, 0},
                         {-1, 0, 0, -1, 0, 0, 0, 0},
                         {0, 0, 0, 0, -1, 0, 0, 0},
-                        {2, 0, 0, 0, 0, 0, -1, 0},
+                        {0, 0, 0, 0, 0, 0, -1, 0},
                         {0, 0, 0, 0, 2, 0, 0, 0},
                 });
             }
@@ -724,7 +724,7 @@ public class Main {
                 int row = -1, col = -1;
                 for (int i = 0; i < chessSet.length; i++) {
                     for (int j = 0; j < chessSet[i].length; j++) {
-                        if (chessSet[i][j] == 1) {
+                        if (chessSet[i][j] == 1 || chessSet[i][j] == 3) {
                             row = i;
                             col = j;
                         }
@@ -774,7 +774,7 @@ public class Main {
 
                 for (int i = 0; i < chessSet.length; i++) {
                     for (int j = 0; j < chessSet[i].length; j++) {
-                        if (chessSet[i][j] == 1) {
+                        if (chessSet[i][j] == 1 || chessSet[i][j] == 3) {
                             row = i;
                             col = j;
                             copy[row][col] -= 1;
@@ -896,44 +896,44 @@ public class Main {
                 {0, 0, 0, 0, 0, -1, 0, 0},
                 {-1, 0, 0, -1, 0, 0, 0, 0},
                 {0, 0, 0, 0, -1, 0, 0, 0},
-                {2, 0, 0, 0, 0, 0, -1, 0},
+                {0, 0, 0, 0, 0, 0, -1, 0},
                 {0, 0, 0, 0, 3, 0, 0, 0},
         }));
 
         try {
 
-            Node res1 = bfs.search();
-            System.out.println("BFS: ");
-            System.out.println("*********************");
-            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
-            Vector<State> solution1 = Problem.solution(res1);
-            if (!solution1.isEmpty())
-                for(State n : solution1) {
-                    n.printState();
-                    System.out.println("*********************");
-                }
-
-            Node res2 = dfs.search();
-            System.out.println("DFS: ");
-            System.out.println("*********************");
-            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
-            Vector<State> solution2 = Problem.solution(res2);
-            if (!solution2.isEmpty())
-                for(State n : solution2) {
-                    n.printState();
-                    System.out.println("*********************");
-                }
-
-            Node res3 = ucs.search();
-            System.out.println("UCS: ");
-            System.out.println("*********************");
-            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
-            Vector<State> solution3 = Problem.solution(res3);
-            if (!solution3.isEmpty())
-                for(State n : solution3) {
-                    n.printState();
-                    System.out.println("*********************");
-                }
+//            Node res1 = bfs.search();
+//            System.out.println("BFS: ");
+//            System.out.println("*********************");
+//            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
+//            Vector<State> solution1 = Problem.solution(res1);
+//            if (!solution1.isEmpty())
+//                for(State n : solution1) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
+//
+//            Node res2 = dfs.search();
+//            System.out.println("DFS: ");
+//            System.out.println("*********************");
+//            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
+//            Vector<State> solution2 = Problem.solution(res2);
+//            if (!solution2.isEmpty())
+//                for(State n : solution2) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
+//
+//            Node res3 = ucs.search();
+//            System.out.println("UCS: ");
+//            System.out.println("*********************");
+//            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
+//            Vector<State> solution3 = Problem.solution(res3);
+//            if (!solution3.isEmpty())
+//                for(State n : solution3) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
 
             bds.search();
 
