@@ -32,6 +32,7 @@ public class UCSearcher extends Searcher{
         while (!frontier.isEmpty()){
 
             Node leaf = this.getShortest(frontier);
+            frontier.remove(leaf);
 
             // Measuring
             //Measuring
@@ -55,7 +56,7 @@ public class UCSearcher extends Searcher{
                 // Measuring
                 expandedNodesCount++;
 
-                if (problem.checkStatus( frontier, child.getState()))
+                if (problem.checkStatus( frontier, child.getState()) == -1)
                     frontier.add(child);
 
             }

@@ -117,8 +117,7 @@ public class DFSearcher extends Searcher{
                     // Measuring
                     expandedNodesCount++;
 //                    child.getState().printState();
-                    if (problem.checkStatus(explored, child.getState()))
-//                        if ( !( frontier.contains(child) && explored.contains(leaf) ) )
+                    if (problem.checkStatus(explored, child.getState()) == -1)
                         frontier.add(child);
                 }
 
@@ -128,6 +127,7 @@ public class DFSearcher extends Searcher{
         }
         return null;
     }
+
 
     private Node recursiveSearch(Node root){
         explored.add(root);

@@ -55,7 +55,7 @@ public class AStarSearcher extends Searcher{
                 // Measuring
                 expandedNodesCount++;
 
-                if (problem.checkStatus( frontier, child.getState()))
+                if (problem.checkStatus( frontier, child.getState()) == -1)
                     frontier.add(child);
 
             }
@@ -77,7 +77,6 @@ public class AStarSearcher extends Searcher{
             }
         }
 
-        System.out.println(cost);
         return res;
 
     }

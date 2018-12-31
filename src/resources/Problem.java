@@ -86,6 +86,7 @@ public abstract class Problem {
      */
     public abstract double heuristic(State s);
 
-    public abstract boolean checkStatus(List<Node> l, State s);
+    public abstract int checkStatus(List<Node> l, State s);
 
+    public abstract boolean areSame(Node n1, Node n2);
 }

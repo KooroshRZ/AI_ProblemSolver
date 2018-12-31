@@ -1,13 +1,11 @@
 package main;
 
+import jdk.nashorn.internal.ir.debug.ASTWriter;
 import resources.Action;
 import resources.Node;
 import resources.Problem;
 import resources.State;
-import searchers.AStarSearcher;
-import searchers.BFSearcher;
-import searchers.DFSearcher;
-import searchers.UCSearcher;
+import searchers.*;
 import utilities.GSException;
 
 import java.util.List;
@@ -399,7 +397,7 @@ public class Main {
             }
 
             @Override
-            public boolean checkStatus(List<Node> l, State s) {
+            public int checkStatus(List<Node> l, State s) {
 //                int [][] puzzle = (int[][]) s.getStatus();
 //                boolean[] flags = new boolean[l.size()];
 //
@@ -419,7 +417,12 @@ public class Main {
 //                for (int i = 0; i < l.size(); i++)
 //                    if (!flags[i]) return false;
 
-                return true;
+                return 1;
+            }
+
+            @Override
+            public boolean areSame(Node n1, Node n2) {
+                return false;
             }
         };
 
@@ -459,8 +462,8 @@ public class Main {
             public State initialState() {
                 return new State(new int[][]{
                         {4, 1, 2},
-                        {7, 5, 8},
-                        {6, 0, 3}
+                        {5, 8, 3},
+                        {7, 6, 0}
                 });
             }
 
@@ -583,7 +586,7 @@ public class Main {
             }
 
             @Override
-            public boolean checkStatus(List<Node> l, State s) {
+            public int checkStatus(List<Node> l, State s) {
 
                 int [][] puzzle = (int[][]) s.getStatus();
                 boolean[] flags = new boolean[l.size()];
@@ -602,7 +605,20 @@ public class Main {
                 }
 
                 for (int i = 0; i < l.size(); i++)
-                    if (!flags[i]) return false;
+                    if (!flags[i]) return i;
+
+                return -1;
+            }
+
+            @Override
+            public boolean areSame(Node n1, Node n2) {
+
+                int [][] copy1 = (int[][]) n1.getState().getStatus();
+                int [][] copy2 = (int[][]) n2.getState().getStatus();
+
+                for (int i = 0; i < copy1.length; i++)
+                    for (int j = 0; j < copy2.length; j++)
+                        if (copy1[i][j] != copy2[i][j]) return false;
 
                 return true;
             }
@@ -613,40 +629,46 @@ public class Main {
         UCSearcher ucs = new UCSearcher(p2);
         AStarSearcher aStar = new AStarSearcher(p2);
 
+        BDSearcher bds = new BDSearcher(p2, new State(new int[][]{
+                {1,2,3},
+                {4,5,6},
+                {7,8,0}
+        }));
+
         try {
 
-//            Node res1 = bfs.search();
-//            System.out.println("BFS: ");
-//            System.out.println("*********************");
-//            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
-//            Vector<State> solution1 = Problem.solution(res1);
-//            if (!solution1.isEmpty())
-//                for(State n : solution1) {
-//                    n.printState();
-//                    System.out.println("*********************");
-//                }
-//
-//            Node res2 = dfs.search();
-//            System.out.println("DFS: ");
-//            System.out.println("*********************");
-//            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
-//            Vector<State> solution2 = Problem.solution(res2);
-//            if (!solution2.isEmpty())
-//                for(State n : solution2) {
-//                    n.printState();
-//                    System.out.println("*********************");
-//                }
-//
-//            Node res3 = ucs.search();
-//            System.out.println("UCS: ");
-//            System.out.println("*********************");
-//            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
-//            Vector<State> solution3 = Problem.solution(res3);
-//            if (!solution3.isEmpty())
-//                for(State n : solution3) {
-//                    n.printState();
-//                    System.out.println("*********************");
-//                }
+            Node res1 = bfs.search();
+            System.out.println("BFS: ");
+            System.out.println("*********************");
+            System.out.println((res1 != null ? " Path Cost: " +  res1.getPathCost() + " " : "NOT FOUND ") + bfs.toString() );
+            Vector<State> solution1 = Problem.solution(res1);
+            if (!solution1.isEmpty())
+                for(State n : solution1) {
+                    n.printState();
+                    System.out.println("*********************");
+                }
+
+            Node res2 = dfs.search();
+            System.out.println("DFS: ");
+            System.out.println("*********************");
+            System.out.println((res2 != null ? " Path Cost: " +  res2.getPathCost() + " " : "NOT FOUND ") + dfs.toString() );
+            Vector<State> solution2 = Problem.solution(res2);
+            if (!solution2.isEmpty())
+                for(State n : solution2) {
+                    n.printState();
+                    System.out.println("*********************");
+                }
+
+            Node res3 = ucs.search();
+            System.out.println("UCS: ");
+            System.out.println("*********************");
+            System.out.println((res3 != null ? " Path Cost: " +  res3.getPathCost() + " " : "NOT FOUND ") + ucs.toString() );
+            Vector<State> solution3 = Problem.solution(res3);
+            if (!solution3.isEmpty())
+                for(State n : solution3) {
+                    n.printState();
+                    System.out.println("*********************");
+                }
 
             System.out.println("searching");
             Node res4 = aStar.search();
@@ -659,6 +681,18 @@ public class Main {
                     n.printState();
                     System.out.println("*********************");
                 }
+
+//            System.out.println("searching");
+            bds.search();
+//            System.out.println("bds: ");
+//            System.out.println("*********************");
+//            System.out.println((res5 != null ? " Path Cost: " +  res5.getPathCost() + " " : "NOT FOUND ") + bds.toString() );
+//            Vector<State> solution5 = Problem.solution(res5);
+//            if (!solution5.isEmpty())
+//                for(State n : solution5) {
+//                    n.printState();
+//                    System.out.println("*********************");
+//                }
 
 
         } catch (GSException | InterruptedException e){
@@ -823,7 +857,7 @@ public class Main {
             }
 
             @Override
-            public boolean checkStatus(List<Node> l, State s) {
+            public int checkStatus(List<Node> l, State s) {
                 int [][] chessSet = (int[][]) s.getStatus();
                 boolean[] flags = new boolean[l.size()];
 
@@ -841,14 +875,30 @@ public class Main {
                 }
 
                 for (int i = 0; i < l.size(); i++)
-                    if (!flags[i]) return false;
-                return true;
+                    if (!flags[i]) return i;
+                return -1;
+            }
+
+            @Override
+            public boolean areSame(Node n1, Node n2) {
+                return false;
             }
         };
 
         BFSearcher bfs = new BFSearcher(p3);
         DFSearcher dfs = new DFSearcher(p3);
         UCSearcher ucs = new UCSearcher(p3);
+//        AStarSearcher aStar = new AStarSearcher(p3);
+        BDSearcher bds = new BDSearcher(p3, new State(new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, -1, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, -1, 0, 0},
+                {-1, 0, 0, -1, 0, 0, 0, 0},
+                {0, 0, 0, 0, -1, 0, 0, 0},
+                {2, 0, 0, 0, 0, 0, -1, 0},
+                {0, 0, 0, 0, 3, 0, 0, 0},
+        }));
 
         try {
 
@@ -884,6 +934,8 @@ public class Main {
                     n.printState();
                     System.out.println("*********************");
                 }
+
+            bds.search();
 
         } catch (GSException | InterruptedException e){
             e.printStackTrace();

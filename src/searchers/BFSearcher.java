@@ -36,6 +36,7 @@ public class BFSearcher extends Searcher{
                 maxNodesInMemory = frontier.size() + explored.size();
 
             Node leaf = frontier.get(0);
+//            frontier.remove(0);
 //            System.out.println("**********************");
 //            leaf.getState().printState();
 
@@ -60,7 +61,7 @@ public class BFSearcher extends Searcher{
                 // Measuring
                 expandedNodesCount++;
 
-                if (problem.checkStatus(explored, child.getState()))
+                if (problem.checkStatus(explored, child.getState()) == -1)
 //                    if ( !( frontier.contains(child) && explored.contains(leaf) ) )
                     frontier.add(child);
             }
