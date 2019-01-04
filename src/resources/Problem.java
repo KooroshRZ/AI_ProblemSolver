@@ -37,13 +37,13 @@ public abstract class Problem {
      */
     public abstract State initialState();
 
-    /**
-     * The actions list which can be performed while the agent is in state s.
-     *
-     * @param s State to review.
-     * @return Vector set of actions available in state s.
-     */
-    public abstract List<Action> actions(State s);
+        /**
+         * The actions list which can be performed while the agent is in state s.
+         *
+         * @param s State to review.
+         * @return Vector set of actions available in state s.
+         */
+        public abstract List<Action> actions(State s);
 
     /**
      * Returns the result node of an action performed on agent when it was in state s.
@@ -88,5 +88,4 @@ public abstract class Problem {
 
     public abstract int checkStatus(List<Node> l, State s);
 
-    public abstract boolean areSame(Node n1, Node n2);
 }

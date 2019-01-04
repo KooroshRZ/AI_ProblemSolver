@@ -18,7 +18,14 @@ public class BDSearcher extends Searcher{
      * @param problem {@link Problem} to be searched.
      */
 
+    /**
+     * list for looping from the goal
+     */
     private List<Node> frontierFromGoal;
+
+    /**
+     * Goal State for bd
+     */
     private State goalState;
 
     public BDSearcher(Problem problem, State goalState) {
@@ -85,7 +92,7 @@ public class BDSearcher extends Searcher{
                 maxNodesInMemory = frontier.size() + frontierFromGoal.size() + explored.size();
 
             Node leafFromGoal = frontierFromGoal.get(0);
-            frontierFromGoal.remove(0);
+//            frontierFromGoal.remove(0);
 
 
             // Measuring

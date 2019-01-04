@@ -75,9 +75,6 @@ public class DFSearcher extends Searcher{
             }
         else{
             explored = new Vector<>();
-//            Node res = recursiveSearch(rootNode());
-//            if (res != null)
-//                return res;
 
             if (frontier == null)
                 throw new GSException("Frontier is null!");
@@ -91,11 +88,7 @@ public class DFSearcher extends Searcher{
                     maxNodesInMemory = frontier.size() + explored.size();
 
                 Node leaf = frontier.get(frontier.size()-1);
-                frontier.remove(frontier.size()-1);
-//                System.out.println("**********************");
-//                leaf.getState().printState();
-//            leaf.getState().printState();
-
+//                frontier.remove(frontier.size()-1);
 
                 // Measuring
                 visitedNodesCount++;
@@ -116,13 +109,12 @@ public class DFSearcher extends Searcher{
 
                     // Measuring
                     expandedNodesCount++;
-//                    child.getState().printState();
+
                     if (problem.checkStatus(explored, child.getState()) == -1)
                         frontier.add(child);
                 }
 
             }
-
 
         }
         return null;
@@ -130,6 +122,7 @@ public class DFSearcher extends Searcher{
 
 
     private Node recursiveSearch(Node root){
+
         explored.add(root);
 
         // Measuring
@@ -149,7 +142,8 @@ public class DFSearcher extends Searcher{
             // Measuring
             expandedNodesCount++;
 
-            if (!explored.contains(child)){
+            if (problem.checkStatus(explored, child.getState()) == -1){
+                frontier.add(child);
                 Node res = recursiveSearch(child);
                 if (res != null)
                     return res;
