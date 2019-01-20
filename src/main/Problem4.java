@@ -7,6 +7,7 @@ import resources.State;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 class Problem4 {
 
@@ -21,17 +22,37 @@ class Problem4 {
                 int [] array = new int[3*length];
                 for (int i = 0; i < array.length; i ++)
                     array[i] = r.nextInt(10);
+
+                new State(array).printState();
                 return new State(array);
             }
 
             @Override
             public List<Action> actions(State s) {
-                return null;
+
+                int[] queue = (int[]) s.getStatus();
+                List<Action> actions = new CopyOnWriteArrayList<>();
+
+                for (int i = 0; i < queue.length-1; i++)
+                    for (int j = i+1; j < queue.length; j++)
+                    actions.add(new Action(new int[]{i,j}, 1));
+
+                return actions;
             }
 
             @Override
             public State result(State s, Action a) {
-                return null;
+
+                int[] queue = (int[]) s.getStatus();
+                int[] copy = new int[queue.length];
+
+                System.arraycopy(queue, 0, copy, 0, queue.length);
+
+                int temp = copy[ ((int[]) a.getData())[0]];
+                copy[ ((int[]) a.getData())[0]] = copy[ ((int[]) a.getData())[1]];
+                copy[ ((int[]) a.getData())[1]] = temp;
+
+                return new State(copy);
             }
 
             @Override

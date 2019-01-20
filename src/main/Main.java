@@ -13,14 +13,14 @@ public class Main {
 //        new P2c().run();
 //        new P2d().run();
 //
-        new P3a().run();
-        new P3b().run();
+//        new P3a().run();
+//        new P3b().run();
 //
-//        new P4();
+        new P4().run();
 //
-//        new P5();
+//        new P5().run();
 //
-//        new P6();
+//        new P6().run();
 
     }
 
